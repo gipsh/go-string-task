@@ -31,7 +31,7 @@ func testValidity(input string) bool {
 // averageNumber
 // estimated: 40min
 // used: 30min
-func averageNumber(input string) (int64, error) {
+func averageNumber(input string) (ret float64, err error) {
 
 	if !testValidity(input) {
 		return 0, fmt.Errorf("invalid input")
@@ -41,7 +41,7 @@ func averageNumber(input string) (int64, error) {
 
 	split := re.FindAllString(input, -1)
 
-	var avg int64
+	var sum float64
 
 	for _, token := range split {
 		p := strings.Split(token, "-")
@@ -51,10 +51,10 @@ func averageNumber(input string) (int64, error) {
 			return 0, fmt.Errorf("error")
 		}
 
-		avg = avg + i
+		sum = sum + float64(i)
 	}
 
-	ret := avg / int64(len(split))
+	ret = sum / float64(len(split))
 
 	return ret, nil
 

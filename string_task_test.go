@@ -34,6 +34,6 @@ func Test_avgNumber(t *testing.T) {
 
 	assert.Nil(t, err)
 
-	assert.Equal(t, avg, int64(20))
+	assert.Equal(t, avg, float64(20))
 
 }
