@@ -59,3 +59,31 @@ func averageNumber(input string) (int64, error) {
 	return ret, nil
 
 }
+
+// wholeStory
+// estimated: 15min
+// used: 15min
+func wholeStory(input string) (string, error) {
+
+	if !testValidity(input) {
+		return "", fmt.Errorf("invalid input")
+	}
+
+	re := regexp.MustCompile(SPLIT_TOKEN)
+
+	split := re.FindAllString(input, -1)
+
+	var story string
+
+	for i, token := range split {
+		p := strings.Split(token, "-")
+		if i == 0 {
+			story = p[0]
+		} else {
+			story = story + " " + p[0]
+		}
+	}
+
+	return story, nil
+
+}
