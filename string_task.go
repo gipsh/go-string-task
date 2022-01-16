@@ -11,8 +11,9 @@ import (
 )
 
 const (
-	MATCH_TOKEN = "(\\w+-\\d+)-*"
-	SPLIT_TOKEN = "(\\w+-\\d+)"
+	MATCH_STRING = "^\\w+$"
+	MATCH_NUMBER = "^\\d+$"
+	SPLIT_TOKEN  = "(\\w+-\\d+)"
 )
 
 // testValidity
@@ -20,14 +21,24 @@ const (
 // used: 45min
 func testValidity(input string) bool {
 
-	// border case not covered by regexp
-	if strings.HasSuffix(input, "-") {
-		return false
+	tokens := strings.Split(input, "-")
+	mString := regexp.MustCompile(MATCH_STRING)
+	mNumber := regexp.MustCompile(MATCH_NUMBER)
+	var m bool
+
+	for i, v := range tokens {
+		if i%2 == 0 {
+			m = mString.MatchString(v)
+		} else {
+			m = mNumber.MatchString(v)
+		}
+
+		if !m {
+			return false
+		}
 	}
 
-	match, _ := regexp.MatchString(MATCH_TOKEN, input)
-
-	return match
+	return true
 
 }
 

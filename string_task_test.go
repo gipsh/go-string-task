@@ -17,13 +17,16 @@ func Test_testValidity(t *testing.T) {
 	input = "-aasdasd-12312312-adasdasd-123123123-"
 	assert.False(t, testValidity(input))
 
-	input = "12312312-adasdasd"
+	input = "12312312-adasdasd-123123123-asdasdasd"
 	assert.False(t, testValidity(input))
 
 	input = "d-12-adsd-13"
 	assert.True(t, testValidity(input))
 
 	input = ""
+	assert.False(t, testValidity(input))
+
+	input = "12-jj-12-adsd-13"
 	assert.False(t, testValidity(input))
 
 }
@@ -39,5 +42,44 @@ func Test_averagNumber(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.Equal(t, avg, float64(37.25))
+
+	_, err = averageNumber("40-bb-60-cc-24-dd-25")
+
+	assert.NotNil(t, err)
+	assert.EqualError(t, err, "invalid input")
+
+}
+
+func Test_wholeStory(t *testing.T) {
+
+	story, err := wholeStory("hello-10-world-30")
+
+	assert.Nil(t, err)
+	assert.Equal(t, story, "hello world")
+
+	story, err = wholeStory("aa-40-bb-60-cc-24-dd-25")
+
+	assert.Nil(t, err)
+	assert.Equal(t, story, "aa bb cc dd")
+
+}
+
+func Test_storyStats(t *testing.T) {
+
+	stats, err := storyStats("hello-10-world-30")
+
+	assert.Nil(t, err)
+	assert.Equal(t, stats.AverageLenght, float64(5))
+	assert.Equal(t, stats.Shortest, int(5))
+	assert.Equal(t, stats.Longest, int(5))
+	assert.Equal(t, stats.AverageLenghtWords, []string{"hello", "world"})
+
+	stats, err = storyStats("hello-22-whats-23-your-33-name-43-again-433-please-43-tell-311-mee-11")
+
+	assert.Nil(t, err)
+	assert.Equal(t, stats.AverageLenght, float64(4.5))
+	assert.Equal(t, stats.Shortest, int(3))
+	assert.Equal(t, stats.Longest, int(6))
+	assert.Equal(t, stats.AverageLenghtWords, []string{"hello", "whats", "your", "name", "again", "tell"})
 
 }
