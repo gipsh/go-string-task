@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// estimated: 10min
+// userd: 10min
 func Test_testValidity(t *testing.T) {
 
 	input := "aasdasd-12312312-adasdasd-123123123"
@@ -31,6 +33,8 @@ func Test_testValidity(t *testing.T) {
 
 }
 
+// estimated: 5min
+// userd: 5min
 func Test_averagNumber(t *testing.T) {
 
 	avg, err := averageNumber("aa-10-bb-30")
@@ -50,6 +54,8 @@ func Test_averagNumber(t *testing.T) {
 
 }
 
+// estimated: 5min
+// userd: 5min
 func Test_wholeStory(t *testing.T) {
 
 	story, err := wholeStory("hello-10-world-30")
@@ -64,6 +70,8 @@ func Test_wholeStory(t *testing.T) {
 
 }
 
+// estimated: 10min
+// userd: 10min
 func Test_storyStats(t *testing.T) {
 
 	stats, err := storyStats("hello-10-world-30")
