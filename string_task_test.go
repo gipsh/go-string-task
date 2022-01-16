@@ -23,4 +23,17 @@ func Test_testValidity(t *testing.T) {
 	input = "d-12-adsd-13"
 	assert.True(t, testValidity(input))
 
+	input = ""
+	assert.False(t, testValidity(input))
+
+}
+
+func Test_avgNumber(t *testing.T) {
+
+	avg, err := averageNumber("aa-10-bb-30")
+
+	assert.Nil(t, err)
+
+	assert.Equal(t, avg, int64(20))
+
 }
