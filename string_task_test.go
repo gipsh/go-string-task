@@ -28,12 +28,16 @@ func Test_testValidity(t *testing.T) {
 
 }
 
-func Test_avgNumber(t *testing.T) {
+func Test_averagNumber(t *testing.T) {
 
 	avg, err := averageNumber("aa-10-bb-30")
 
 	assert.Nil(t, err)
-
 	assert.Equal(t, avg, float64(20))
+
+	avg, err = averageNumber("aa-40-bb-60-cc-24-dd-25")
+
+	assert.Nil(t, err)
+	assert.Equal(t, avg, float64(37.25))
 
 }
